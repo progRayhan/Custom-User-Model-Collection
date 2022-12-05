@@ -6,7 +6,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['email', 'username', 'phone', 'fvrtColor', 'password', 'password2']
+        fields = ['email', 'username', 'phone', 'fvrtColor','verify_code', 'password', 'password2']
 
         extra_kwargs = {
             'password' : {'write_only': True}
@@ -18,6 +18,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
             username = self.validated_data['username'],
             phone = self.validated_data['phone'],
             fvrtColor = self.validated_data['fvrtColor'],
+            verify_code = self.validated_data['verify_code'],
         )
 
         password = self.validated_data['password']

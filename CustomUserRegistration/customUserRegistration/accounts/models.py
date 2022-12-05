@@ -48,6 +48,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     father_name = models.CharField(max_length=100)
     mother_name = models.CharField(max_length=100)
     fvrtColor = models.CharField(max_length=100)
+    verify_code = models.CharField(max_length=10)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
