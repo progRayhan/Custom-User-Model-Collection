@@ -49,3 +49,29 @@ class RegistrationAV(APIView):
         
         else:
             return Response(serializer.errors)
+
+
+class EmailVerificationAV(APIView):
+    def post(self, request):
+        try:
+            email = request.data['email']
+            code = request.data['verify_code']
+        except:
+            return Response({"type":"error", 'message':'email or code is not provided'})
+
+        if CustomUser.objects.filter(email=email).exists():
+
+            if CustomUser.objects.filter(email=email, is_verified=False).exists():
+
+                Usr = CustomUser.objects.get(email=email)
+                if str(Usr.verify_code) == str(code):
+                    CustomUser.objects.filter(email=email).update(is_verified=True, is_active=True)
+                    return Response({"type":"success", "message":"your account has been verified"})
+                else:
+                    return Response({'error':'your verification code is invalid'})
+
+            else:
+                return Response({'error': 'your account is already verified'})
+
+        else:
+            return Response({'type':'error', 'message':'Registered email not found'})
