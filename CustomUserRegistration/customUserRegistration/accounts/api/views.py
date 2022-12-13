@@ -7,6 +7,8 @@ from accounts.api.serializers import CustomUserSerializer
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 
+from rest_framework.authtoken.models import Token
+
 class RegistrationAV(APIView):
     def post(self, request):
 
@@ -45,6 +47,10 @@ class RegistrationAV(APIView):
                 data['username'] = account.username
                 data['phone'] = account.phone
                 data['verify_code'] = account.verify_code
+
+                user_token = Token.objects.get(user=account).key
+                data['token'] = user_token
+                
                 return Response(data)
         
         else:

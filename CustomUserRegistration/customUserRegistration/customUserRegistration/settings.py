@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'accounts.apps.AccountsConfig',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,9 @@ EMAIL_HOST_USER = 'rayhan.bdappdeveloper@gmail.com'
 EMAIL_HOST_PASSWORD = 'deyigtzomwttohuv'
 EMAIL_PORT = 587
 # For Email Sending (End)
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
