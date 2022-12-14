@@ -1,9 +1,7 @@
 from django.urls import path
-from django.http import HttpResponse
-
-def home(request):
-    return HttpResponse("Hello Django")
+from accounts.api.views import ProfileListAV, ProfileDetailsAV
 
 urlpatterns = [
-    path('', home),
+    path('profilelist/', ProfileListAV.as_view()),
+    path('profiledetails/<str:pk>/', ProfileDetailsAV.as_view()),
 ]
